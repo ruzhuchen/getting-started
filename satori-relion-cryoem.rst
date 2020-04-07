@@ -14,6 +14,7 @@ Quick start
 ^^^^^^^^^^^
 
 * Transfer data
+If you are using Aspera to transfer large dataset, please visit https://mit-satori.github.io/satori-copy-large-filesets.html for instructions.
 
 Data should be transferred to: 
 /nobackup/users/``your_kerbos_id`` .
@@ -48,12 +49,17 @@ Use satori-login-002.mit.edu
        ssh -X node0028 
        
   5. Add paths to access relion libraries:
-  
+     For older version 3.07:
      .. code:: bash
      
        export PATH=/nobackup/users/ruzhu/RELION/bin:/nobackup/users/ruzhu/CTFfind4/bin:/opt/ibm/spectrum_mpi/bin:$PATH
        export LD_LIBRARY_PATH=/opt/ibm/spectrum_mpi/profilesupport/lib:/nobackup/users/ruzhu/CTFfind4/lib:$LD_LIBRARY_PATH
-       
+     
+     To use version 3.1 beta, the paths are:
+     .. code:: bash
+     export PATH=/nobackup/users/ruzhu/Apps/Relion-3.1/bin:/nobackup/users/ruzhu/CTFfind4/bin:/opt/ibm/spectrum_mpi/bin:$PATH
+     export LD_LIBRARY_PATH=/opt/ibm/spectrum_mpi/profilesupport/lib:/nobackup/users/ruzhu/CTFfind4/lib:$LD_LIBRARY_PATH
+     
   6. Open Relion by typing: 
   
      .. code:: bash   
@@ -61,6 +67,15 @@ Use satori-login-002.mit.edu
        relion
        
   7. Use GUI to configure your job.
+     To run jobs interactively with GUI, please user the command below to start with LSF:
+     .. code:: bash
+     bsub -XF -Ip -gpu 'num=4' -n 40 -R 'span[ptile=40]' -q normal ./gui.sh
+     
+    where "gui.sh" is:
+     .. code:: bash
+     export PATH=/nobackup/users/ruzhu/Apps/Relion-3.1/bin:/nobackup/users/ruzhu/CTFfind4/bin:/opt/ibm/spectrum_mpi/bin:$PATH
+     export LD_LIBRARY_PATH=/opt/ibm/spectrum_mpi/profilesupport/lib:/nobackup/users/ruzhu/CTFfind4/lib:$LD_LIBRARY_PATH
+     relion
   
   8. Use "Print" command to print job commands to terminal. 
   
